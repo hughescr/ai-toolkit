@@ -1,12 +1,12 @@
 [submodule "repositories/sd-scripts"]
 	path = repositories/sd-scripts
-	url = https://github.com/kohya-ss/sd-scripts.git
+	url = https://github.com/hughescr/sd-scripts.git
 [submodule "repositories/leco"]
 	path = repositories/leco
 	url = https://github.com/p1atdev/LECO
 [submodule "repositories/batch_annotator"]
 	path = repositories/batch_annotator
-	url = https://github.com/ostris/batch-annotator
+	url = https://github.com/hughescr/batch-annotator
 [submodule "repositories/ipadapter"]
 	path = repositories/ipadapter
 	url = https://github.com/tencent-ailab/IP-Adapter.git

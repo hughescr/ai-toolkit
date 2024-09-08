@@ -33,9 +33,12 @@ from diffusers import EMAModel
 import math
 from toolkit.train_tools import precondition_model_outputs_flow_match
 
+from torch.amp import GradScaler
+
 
 def flush():
-    torch.cuda.empty_cache()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
     gc.collect()
 
 
@@ -58,7 +61,7 @@ class SDTrainer(BaseSDTrainProcess):
         self.negative_prompt_pool: Union[List[str], None] = None
         self.batch_negative_prompt: Union[List[str], None] = None
 
-        self.scaler = torch.cuda.amp.GradScaler()
+        self.scaler = GradScaler(device=self.device)
 
         self.is_bfloat = self.train_config.dtype == "bfloat16" or self.train_config.dtype == "bf16"
 
@@ -1560,7 +1563,7 @@ class SDTrainer(BaseSDTrainProcess):
                 total_loss = loss
             else:
                 total_loss += loss
-            if len(batch_list) > 1 and self.model_config.low_vram:
+            if len(batch_list) > 1 and self.model_config.low_vram and torch.cuda.is_available():
                 torch.cuda.empty_cache()
 
 

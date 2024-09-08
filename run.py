@@ -21,6 +21,10 @@ if os.environ.get("DEBUG_TOOLKIT", "0") == "1":
 import argparse
 from toolkit.job import get_job
 
+import multiprocessing as mp
+
+if __name__ == "__main__":
+    mp.set_start_method('spawn', force=True)  # Add this line to set 'spawn' as the start method
 
 def print_end_message(jobs_completed, jobs_failed):
     failure_string = f"{jobs_failed} failure{'' if jobs_failed == 1 else 's'}" if jobs_failed > 0 else ""

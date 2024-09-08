@@ -107,7 +107,8 @@ class BlankNetwork:
 
 
 def flush():
-    torch.cuda.empty_cache()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
     gc.collect()
 
 
@@ -613,8 +614,8 @@ class StableDiffusion:
             text_encoder_2.to(self.device_torch, dtype=dtype)
             flush()
 
-            print("Quantizing T5")
-            quantize(text_encoder_2, weights=qfloat8)
+            # print("Quantizing T5")
+            # quantize(text_encoder_2, weights=qfloat8)
             freeze(text_encoder_2)
             flush()
 

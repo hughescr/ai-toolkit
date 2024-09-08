@@ -26,6 +26,9 @@ import platform
 def is_native_windows():
     return platform.system() == "Windows" and platform.release() != "2"
 
+def is_native_osx():
+    return platform.system() == "Darwin"
+
 if TYPE_CHECKING:
     from toolkit.stable_diffusion_model import StableDiffusion
 
@@ -593,7 +596,7 @@ def get_dataloader_from_datasets(
 
     dataloader_kwargs = {}
     
-    if is_native_windows():
+    if is_native_windows() or is_native_osx():
         dataloader_kwargs['num_workers'] = 0
     else:
         dataloader_kwargs['num_workers'] = dataset_config_list[0].num_workers

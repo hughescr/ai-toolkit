@@ -6,7 +6,9 @@ import time
 from typing import TYPE_CHECKING, Union, List
 import sys
 
-from torch.cuda.amp import GradScaler
+import torch
+
+from torch.amp import GradScaler
 
 from toolkit.paths import SD_SCRIPTS_ROOT
 
