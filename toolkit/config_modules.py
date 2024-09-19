@@ -41,6 +41,7 @@ class SampleConfig:
         self.width: int = kwargs.get('width', 512)
         self.height: int = kwargs.get('height', 512)
         self.prompts: list[str] = kwargs.get('prompts', [])
+        self.prompts_2: Optional[list[str]] = kwargs.get('prompts_2', None)
         self.neg = kwargs.get('neg', False)
         self.seed = kwargs.get('seed', 0)
         self.walk_seed = kwargs.get('walk_seed', False)

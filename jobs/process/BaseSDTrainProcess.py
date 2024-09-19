@@ -222,6 +222,10 @@ class BaseSDTrainProcess(BaseTrainProcess):
             output_path = os.path.join(sample_folder, filename)
 
             prompt = sample_config.prompts[i]
+            if sample_config.prompts_2 and sample_config.prompts_2 is not None and sample_config.prompts_2[i]:
+                prompt2 = sample_config.prompts_2[i]
+            else:
+                prompt2 = None
 
             # add embedding if there is one
             # note: diffusers will automatically expand the trigger to the number of added tokens
@@ -245,6 +249,7 @@ class BaseSDTrainProcess(BaseTrainProcess):
 
             gen_img_config_list.append(GenerateImageConfig(
                 prompt=prompt,  # it will autoparse the prompt
+                prompt_2=prompt2,
                 width=sample_config.width,
                 height=sample_config.height,
                 negative_prompt=sample_config.neg,
